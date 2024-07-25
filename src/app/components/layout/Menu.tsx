@@ -11,7 +11,7 @@ export default function Menu() {
               href="/schedules"
             >
               <i className="fas fa-tv opacity-75 mr-2 text-sm"></i>
-              Listar Agendamentos
+              List Schedules
             </a>
           </li>
           <li className="items-center">
@@ -20,7 +20,7 @@ export default function Menu() {
               href="/schedules/create"
             >
               <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>
-              Criar Agendamento
+              Create Schedule
             </a>
           </li>
         </ul>
