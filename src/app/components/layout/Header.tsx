@@ -1,6 +1,6 @@
-import CardsTotalSchedules from '@/app/components/feature/cards/TotalSchedules';
-import CardsConfirmations from '@/app/components/feature/cards/Confirmations';
-import CardsCancelations from '@/app/components/feature/cards/Cancelations';
+import CardsTotalSchedules from '@/app/components/feature/cards/CardTotalSchedules';
+import CardsConfirmations from '@/app/components/feature/cards/CardConfirmations';
+import CardsCancelations from '@/app/components/feature/cards/CardCancelations';
 
 export default function Header() {
     return (

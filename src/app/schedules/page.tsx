@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { revalidateTag } from 'next/cache';
 import { getAllSchedules } from '@/api/schedules/routes';
 
 export const metadata: Metadata = {
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Schedules() {
   const schedules = await getAllSchedules();
-  console.log(schedules);
+  revalidateTag('get-all-schedules');
   return (
     <>
       <div className="px-4 md:px-10 mx-auto w-full -m-24">
@@ -62,10 +63,10 @@ export default async function Schedules() {
                     {schedules?.map((schedule: any) => (
                       <tr key={schedule.id}>
                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                          <a href={'schedules/' + schedule._id}>{schedule._id}</a>
+                          <a href={'schedules/' + schedule.id}>{schedule.id}</a>
                         </th>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <a href={'schedules/' + schedule._id}>{schedule.plate}</a>
+                          <a href={'schedules/' + schedule.id}>{schedule.plate}</a>
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           {schedule.start + ' - ' + schedule.finish}
@@ -77,7 +78,7 @@ export default async function Schedules() {
                           <span className="text-gray-900 mr-4">{schedule.status}</span>
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <a href={'schedules/' + schedule._id}>
+                          <a href={'schedules/' + schedule.id}>
                             <i className="fas fa-edit hover:text-green-600"></i>&nbsp;&nbsp;&nbsp;
                           </a>
                           <a href="">
