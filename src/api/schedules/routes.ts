@@ -1,3 +1,5 @@
+import axios from "axios";
+
 /**
  * Get all schedules.
  */
@@ -6,6 +8,9 @@ export async function getAllSchedules() {
     const API_ENDPOINT = 'http://localhost:3000/schedule/';
     const response = await fetch(API_ENDPOINT, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       next: {
         tags: ['get-all-schedules']
       },
@@ -24,21 +29,11 @@ export async function createOneSchedule(data: any) {
   try {
     const API_ENDPOINT = 'http://localhost:3000/schedule/';
     const start = data.day + ' ' + data.hour;
-    const body = JSON.stringify({
-      plate: data.plate,
-      type: data.type,
-      start: start,
-    });
-    console.log(body);
-    const response = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      body: body,
-      next: {
-        tags: ['create-schedule']
-      },
-    });
+    data.start = start;
+    delete data.day && delete data.hour;
+    const response = await axios.post(API_ENDPOINT, data);
   
-    return await response.json();
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -69,15 +64,12 @@ export async function getOneSchedule(id: string) {
 export async function updateOneSchedule(id: string, data: any) {
   try {
     const API_ENDPOINT = 'http://localhost:3000/schedule/' + id;
-    const response = await fetch(API_ENDPOINT, {
-      method: 'PATCH',
-      body: JSON.stringify(data),
-      next: {
-        tags: ['update-schedule']
-      },
-    });
+    const start = data.day + ' ' + data.hour;
+    data.start = start;
+    const response = await axios.patch(API_ENDPOINT, data);
+    console.log(response.data);
   
-    return await response.json();
+    return response.data;
   } catch (error) {
     console.log(error);
   }

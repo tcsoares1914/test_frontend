@@ -9,6 +9,7 @@ export default function FormCreateSchedule() {
   const {register, handleSubmit, formState: { errors }} = useForm();
   const onSubmit = async (data: any) => {
     await createOneSchedule(data);
+    window.location.href = "http://localhost:3001/schedules/";
   }
   return (
     <>
@@ -21,7 +22,7 @@ export default function FormCreateSchedule() {
                 htmlFor="plate"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Plate
+                * Plate
               </label>
               <div className="mt-2">
                 <input
@@ -43,7 +44,7 @@ export default function FormCreateSchedule() {
                 htmlFor="hour"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Type
+                * Type
               </label>
               <div className="mt-2">
                 <select
@@ -53,7 +54,7 @@ export default function FormCreateSchedule() {
                   <option>Choose type</option>
                   {types.map((data) => {
                     return (
-                      <option key={data.type}>{data.type}</option>
+                      <option key={data.type} value={data.type}>{data.type}</option>
                     )
                   })}
                 </select>
@@ -69,7 +70,7 @@ export default function FormCreateSchedule() {
                 htmlFor="day"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Day
+                * Day
               </label>
               <div className="mt-2">
                 <input
@@ -88,7 +89,7 @@ export default function FormCreateSchedule() {
                 htmlFor="type"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Hour
+                * Hour
               </label>
               <div className="mt-2">
                 <select
@@ -98,7 +99,7 @@ export default function FormCreateSchedule() {
                   <option>Choose hour</option>
                   {hours.map((data) => {
                     return (
-                      <option key={data.slot}>{data.slot}</option>
+                      <option key={data.hour} value={data.hour}>{data.hour}</option>
                     )
                   })}
                 </select>

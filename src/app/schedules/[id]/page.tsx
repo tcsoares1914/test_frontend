@@ -1,4 +1,7 @@
+
 import type { Metadata } from 'next';
+import { useRouter } from "next/navigation";
+import { getOneSchedule } from '@/api/schedules/routes';
 import FormEditSchedule from '@/app/components/feature/forms/FormEditSchedule';
 
 export const metadata: Metadata = {
@@ -6,7 +9,8 @@ export const metadata: Metadata = {
   description: '',
 };
 
-export default function CreateSchedule() {
+export default async function EditSchedule({ params }: { params: { id: string } }) {
+  const schedule = await getOneSchedule(params.id);
   return (
     <>
       <div className="px-4 md:px-10 mx-auto w-full -m-24">
@@ -23,7 +27,7 @@ export default function CreateSchedule() {
                   <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right"></div>
                 </div>
               </div>
-              <FormEditSchedule />
+              <FormEditSchedule schedule={schedule} />
             </div>
           </div>
         </div>
