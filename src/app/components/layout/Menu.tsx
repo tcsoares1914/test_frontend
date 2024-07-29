@@ -30,7 +30,7 @@ export default function Menu() {
               href="/confirmations"
             >
               <i className="fas fa-thumbs-up opacity-75 mr-2 text-sm"></i>
-              Confirmados
+              Lista Confirmados
             </a>
           </li>
           <li className="items-center">
@@ -39,7 +39,7 @@ export default function Menu() {
               href="/cancelations"
             >
               <i className="fas fa-times-circle opacity-75 mr-2 text-sm"></i>
-              Cancelados
+              Lista Cancelados
             </a>
           </li>
         </ul>
