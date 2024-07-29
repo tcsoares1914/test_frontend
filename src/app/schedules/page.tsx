@@ -74,7 +74,15 @@ export default async function Schedules() {
                             <span className="text-gray-900 mr-4">{schedule.type}</span>
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            <span className="text-gray-900 mr-4">{schedule.status}</span>
+                            {schedule.status === 'PENDING' && (
+                              <span className="text-gray-900 mr-4">{schedule.status}</span>
+                            )}
+                            {schedule.status === 'CONFIRMED' && (
+                              <span className="text-green-700 mr-4">{schedule.status}</span>
+                            )}
+                            {schedule.status === 'CANCELED' && (
+                              <span className="text-red-700 mr-4">{schedule.status}</span>
+                            )}
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                             <a href={'schedules/' + schedule.id}>
