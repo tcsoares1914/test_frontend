@@ -19,6 +19,8 @@ export default function FormEditSchedule(schedule: any) {
   const {register, handleSubmit, formState: { errors }} = useForm();
   const onSubmit = async (data: any) => {
 
+    console.log('onSubmit');
+
     const date = new Date(data.day);
 
     if (date.getDay() === 5 || date.getDay() === 6) {
@@ -83,7 +85,7 @@ export default function FormEditSchedule(schedule: any) {
                     )
                   })}
                 </select>
-                {errors.plate?.type === "required" && (
+                {errors.type?.type === "required" && (
                   <p role="alert">This field is required</p>
                 )}
               </div>
@@ -106,7 +108,7 @@ export default function FormEditSchedule(schedule: any) {
                   value={day}
                   onChange={(e) => setDay(e.target.value)}
                 />
-                {errors.plate?.type === "required" && (
+                {errors.day?.type === "required" && (
                   <p role="alert">This field is required</p>
                 )}
               </div>
@@ -125,7 +127,7 @@ export default function FormEditSchedule(schedule: any) {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                   value={startHour}
                   onChange={(e) => setStartHour(e.target.value)}
-                  disabled
+                
                   >
                   <option>Choose hour</option>
                   {hours.map((data) => {
@@ -134,7 +136,7 @@ export default function FormEditSchedule(schedule: any) {
                     )
                   })}
                 </select>
-                {errors.plate?.type === "required" && (
+                {errors.hour?.type === "required" && (
                   <p role="alert">This field is required</p>
                 )}
               </div>
@@ -149,7 +151,7 @@ export default function FormEditSchedule(schedule: any) {
               <div className="mt-2">
                 <select
                   id="finishHour"
-                  {...register('finishHour', { required: true })}
+                  {...register('finishHour', { required: false })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
                   value={finishHour}
                   onChange={(e) => setFinishHour(e.target.value)}
@@ -157,7 +159,7 @@ export default function FormEditSchedule(schedule: any) {
                   >
                   <option value={finishHour}>{finishHour}</option>
                 </select>
-                {errors.plate?.type === "required" && (
+                {errors.finishHour?.type === "required" && (
                   <p role="alert">This field is required</p>
                 )}
               </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { revalidateTag } from 'next/cache';
-import { getAllSchedules, deleteOneSchedule } from '@/api/schedules/routes';
+import { getAllSchedules } from '@/api/schedules/routes';
 
 export const metadata: Metadata = {
   title: 'Lava Jato - Agendamentos',
@@ -10,10 +10,6 @@ export const metadata: Metadata = {
 export default async function Schedules() {
   const schedules = await getAllSchedules();
   revalidateTag('get-all-schedules');
-
-  const handleDeleteScheduele = async (id: string) => {
-    // await deleteOneSchedule(id)
-  }
   return (
     <>
       <div className="px-4 md:px-10 mx-auto w-full -m-24">
@@ -82,10 +78,7 @@ export default async function Schedules() {
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                             <a href={'schedules/' + schedule.id}>
-                              <i className="fas fa-edit hover:text-green-600"></i>&nbsp;&nbsp;&nbsp;
-                            </a>
-                            <a href="#">
-                              <i className="far fa-trash-alt hover:text-green-600"></i>
+                              <i className="fas fa-edit hover:text-green-600"></i>&nbsp;EDIT
                             </a>
                           </td>
                         </tr>
