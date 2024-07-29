@@ -1,21 +1,35 @@
 'use client'
 
-import { createOneSchedule } from '@/api/schedules/routes';
+import { createOneSchedule, checkIfDayIsValid } from '@/api/schedules/routes';
 import types from '@/mocks/types.json';
 import hours from '@/mocks/hours.json';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
 
 export default function FormCreateSchedule() {
+  const [day, setDay] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>('');
+
   const {register, handleSubmit, formState: { errors }} = useForm();
   const onSubmit = async (data: any) => {
-    await createOneSchedule(data);
-    window.location.href = "http://localhost:3001/schedules/";
+    const date = new Date(data.day);
+
+    if (date.getDay() === 5 || date.getDay() === 6) {
+      setErrorMessage('Schedules is not available on weekends!');
+    }
+
+    if (date.getDay() !== 5 && date.getDay() !== 6) {
+      await createOneSchedule(data);
+      window.location.href = "http://localhost:3001/schedules/";
+    }
   }
+
   return (
     <>
       <div className="rounded-t mb-0 px-4 py-3 border-0">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p className="mt-1 text-sm leading-6 text-gray-600">* Required fields</p>
+          <p className="mt-1 text-sm leading-6 bg-red-400 text-white border-spacing-0 rounded">{errorMessage}</p>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
@@ -77,7 +91,8 @@ export default function FormCreateSchedule() {
                   type="date"
                   {...register('day', { required: true })}
                   id="day"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" 
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                  onChange={(e) => setDay(e.target.value)}
                 />
                 {errors.plate?.type === "required" && (
                   <p role="alert">This field is required</p>

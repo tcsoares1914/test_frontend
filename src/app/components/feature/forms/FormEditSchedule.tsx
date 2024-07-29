@@ -11,17 +11,30 @@ export default function FormEditSchedule(schedule: any) {
   const [plate, setPlate] = useState<string>(schedule.schedule.plate);
   const [type, setType] = useState<string>(schedule.schedule.type);
   const [day, setDay] = useState<string>(moment(schedule.schedule.start).format('YYYY-MM-DD'));
-  const [hour, setHour] = useState<string>(moment(schedule.schedule.start).format('HH:mm:ss'));
+  const [startHour, setStartHour] = useState<string>(moment(schedule.schedule.start).format('HH:mm:ss'));
+  const [finishHour, setFinishHour] = useState<string>(moment(schedule.schedule.finish).format('HH:mm:ss'));
+  const [start, setStart] = useState<string>(schedule.schedule.start);
+  const [finish, setFinish] = useState<string>(schedule.schedule.finish);
+  const [errorMessage, setErrorMessage] = useState<string | null>('');
   const {register, handleSubmit, formState: { errors }} = useForm();
   const onSubmit = async (data: any) => {
-    await updateOneSchedule(schedule.id, data);
-    window.location.href = "http://localhost:3001/schedules/";
+
+    const date = new Date(data.day);
+
+    if (date.getDay() === 5 || date.getDay() === 6) {
+      setErrorMessage('Schedules is not available on weekends!');
+    }
+
+    if (date.getDay() !== 5 && date.getDay() !== 6) {
+      await updateOneSchedule(schedule.id, data);
+      window.location.href = "http://localhost:3001/schedules/";
+    }
   }
   return (
     <>
       <div className="rounded-t mb-0 px-4 py-3 border-0">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p className="mt-1 text-sm leading-6 text-gray-600">* Required fields</p>
+        <p className="mt-1 text-sm leading-6 bg-red-400 text-white border-spacing-0 rounded">{errorMessage}</p>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
@@ -77,7 +90,7 @@ export default function FormEditSchedule(schedule: any) {
             </div>
           </div>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label
                 htmlFor="day"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -98,20 +111,21 @@ export default function FormEditSchedule(schedule: any) {
                 )}
               </div>
             </div>
-            <div className="sm:col-span-3">
+            <div className="sm:col-span-2">
               <label
                 htmlFor="type"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                * Hour
+                Start
               </label>
               <div className="mt-2">
                 <select
                   id="hour"
                   {...register('hour', { required: true })}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
-                  value={hour}
-                  onChange={(e) => setHour(e.target.value)}
+                  value={startHour}
+                  onChange={(e) => setStartHour(e.target.value)}
+                  disabled
                   >
                   <option>Choose hour</option>
                   {hours.map((data) => {
@@ -119,6 +133,29 @@ export default function FormEditSchedule(schedule: any) {
                       <option key={data.hour} value={data.hour}>{data.hour}</option>
                     )
                   })}
+                </select>
+                {errors.plate?.type === "required" && (
+                  <p role="alert">This field is required</p>
+                )}
+              </div>
+            </div>
+            <div className="sm:col-span-2">
+              <label
+                htmlFor="type"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Finish
+              </label>
+              <div className="mt-2">
+                <select
+                  id="finishHour"
+                  {...register('finishHour', { required: true })}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
+                  value={finishHour}
+                  onChange={(e) => setFinishHour(e.target.value)}
+                  disabled
+                  >
+                  <option value={finishHour}>{finishHour}</option>
                 </select>
                 {errors.plate?.type === "required" && (
                   <p role="alert">This field is required</p>
