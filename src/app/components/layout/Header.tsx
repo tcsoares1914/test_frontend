@@ -1,3 +1,7 @@
+import CardsTotalSchedules from '@/app/components/feature/cards/CardTotalSchedules';
+import CardsConfirmations from '@/app/components/feature/cards/CardConfirmations';
+import CardsCancelations from '@/app/components/feature/cards/CardCancelations';
+
 export default async function Header() {
     return (
       <>
@@ -5,6 +9,9 @@ export default async function Header() {
           <div className="px-4 md:px-10 mx-auto w-full">
             <div>
               <div className="flex flex-wrap">
+                <CardsTotalSchedules />
+                <CardsConfirmations />
+                <CardsCancelations />
               </div>
             </div>
           </div>

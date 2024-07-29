@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { updateOneSchedule } from '@/api/schedules/routes';
-import types from '@/mocks/types.json';
-import hours from '@/mocks/hours.json';
-
+import typesOptions from '@/mocks/types.json';
+import hoursOptions from '@/mocks/hours.json';
+import statusOptions from '@/mocks/status.json';
 
 export default function FormEditSchedule(schedule: any) {
   const [plate, setPlate] = useState<string>(schedule.schedule.plate);
@@ -16,6 +16,7 @@ export default function FormEditSchedule(schedule: any) {
   const [finishHour, setFinishHour] = useState<string>(moment(schedule.schedule.finish).format('HH:mm:ss'));
   const [start, setStart] = useState<string>(schedule.schedule.start);
   const [finish, setFinish] = useState<string>(schedule.schedule.finish);
+  const [status, setStatus] = useState<string>(schedule.schedule.status);
   const [errorMessage, setErrorMessage] = useState<string | null>('');
   const {register, handleSubmit, formState: { errors }} = useForm();
   const onSubmit = async (data: any) => {
@@ -39,6 +40,35 @@ export default function FormEditSchedule(schedule: any) {
       <div className="rounded-t mb-0 px-4 py-3 border-0">
         <form onSubmit={handleSubmit(onSubmit)}>
         <p className="mt-1 text-sm leading-6 bg-red-400 text-white border-spacing-0 rounded">{errorMessage}</p>
+        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label
+                htmlFor="plate"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                * Status
+              </label>
+              <div className="mt-2">
+                <select
+                  id="status"
+                  {...register('status', { required: true })}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option>Choose status</option>
+                  {statusOptions.map((data) => {
+                    return (
+                      <option key={data.status} value={data.status}>{data.status}</option>
+                    )
+                  })}
+                </select>
+                {errors.status?.type === "required" && (
+                  <p role="alert">This field is required</p>
+                )}
+              </div>
+            </div>
+          </div>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
@@ -81,7 +111,7 @@ export default function FormEditSchedule(schedule: any) {
                   onChange={(e) => setType(e.target.value)}
                 >
                   <option>Choose type</option>
-                  {types.map((data) => {
+                  {typesOptions.map((data) => {
                     return (
                       <option key={data.type} value={data.type}>{data.type}</option>
                     )
@@ -132,7 +162,7 @@ export default function FormEditSchedule(schedule: any) {
                 
                   >
                   <option>Choose hour</option>
-                  {hours.map((data) => {
+                  {hoursOptions.map((data) => {
                     return (
                       <option key={data.hour} value={data.hour}>{data.hour}</option>
                     )
