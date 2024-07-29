@@ -1,8 +1,10 @@
 import { getSchedulesByStatus } from '@/api/schedules/routes';
+import {format } from 'date-fns'
 
 export default async function CardsTotalSchedules() {
   const schedules = await getSchedulesByStatus();
   const total = schedules.total;
+  const date = format(new Date(), "dd/MM/yyyy");
   return (
     <>
       <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
@@ -21,7 +23,7 @@ export default async function CardsTotalSchedules() {
             </div>
             <p className="text-sm text-blueGray-400 mt-4">
               <span className="whitespace-nowrap">
-                Date: 2024-07-25
+                Date: {date}
               </span>
             </p>
           </div>
