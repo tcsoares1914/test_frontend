@@ -11,7 +11,7 @@ export default function Menu() {
               href="/schedules"
             >
               <i className="fas fa-tv opacity-75 mr-2 text-sm"></i>
-              List Schedules
+              Agendamentos
             </a>
           </li>
           <li className="items-center">
@@ -20,7 +20,26 @@ export default function Menu() {
               href="/schedules/create"
             >
               <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>
-              Create Schedule
+              Criar Agendamento
+            </a>
+          </li>
+          <hr />
+          <li className="items-center">
+            <a
+              className="text-gray-700 hover:text-green-600 text-xs uppercase py-3 font-bold block"
+              href="/confirmations"
+            >
+              <i className="fas fa-thumbs-up opacity-75 mr-2 text-sm"></i>
+              Confirmados
+            </a>
+          </li>
+          <li className="items-center">
+            <a
+              className="text-gray-700 hover:text-green-600 text-xs uppercase py-3 font-bold block"
+              href="/cancelations"
+            >
+              <i className="fas fa-times-circle opacity-75 mr-2 text-sm"></i>
+              Cancelados
             </a>
           </li>
         </ul>

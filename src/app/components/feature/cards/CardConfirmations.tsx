@@ -12,12 +12,12 @@ export default async function CardsConfirmations() {
             <div className="flex-auto p-4">
               <div className="flex flex-wrap">
                 <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                  <h5 className="text-blueGray-400 uppercase font-bold text-xs">Total Confirmations</h5>
-                  <span className="font-semibold text-xl text-blueGray-700">{total}</span>
+                  <h5 className="text-blueGray-400 uppercase font-bold text-xs"><a href='/confirmations'>Confirmations</a></h5>
+                  <span className="font-semibold text-xl text-blueGray-700"><a href='/confirmations'>{total}</a></span>
                 </div>
                 <div className="relative w-auto pl-4 flex-initial">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-green-500">
-                    <i className="fas fa-thumbs-up"></i>
+                    <a href='/confirmations'><i className="fas fa-thumbs-up"></i></a>
                     </div>
                 </div>
               </div>
