@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { format } from 'date-fns';
 import { revalidateTag } from 'next/cache';
 import { getAllSchedules } from '@/api/schedules/routes';
 
@@ -20,7 +21,7 @@ export default async function Schedules() {
                 <div className="flex flex-wrap items-center">
                   <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                     <h3 className="font-semibold text-base text-blueGray-700">
-                      Schedules
+                      Agendamentos
                     </h3>
                   </div>
                   <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
@@ -42,19 +43,19 @@ export default async function Schedules() {
                           ID
                         </th>
                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Plate
+                          Placa
                         </th>
                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Slot
+                          Agendamento
                         </th>
                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Type
+                          Tipo
                         </th>
                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                           Status
                         </th>
                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Actions
+                          Ações
                         </th>
                       </tr>
                     </thead>
@@ -68,7 +69,7 @@ export default async function Schedules() {
                             <a href={'schedules/' + schedule.id}>{schedule.plate}</a>
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {schedule.start + ' - ' + schedule.finish}
+                            {format(new Date(schedule.start), "dd/MM/yyyy (HH:mm:ss") + ' - ' + format(new Date(schedule.finish), "HH:mm:ss)")}
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                             <span className="text-gray-900 mr-4">{schedule.type}</span>

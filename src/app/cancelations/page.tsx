@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { format } from 'date-fns';
 import { getSchedulesByStatus } from '@/api/schedules/routes';
 
 export const metadata: Metadata = {
@@ -67,7 +68,7 @@ export default async function Schedules() {
                             <a href={'schedules/' + schedule.id}>{schedule.plate}</a>
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            {schedule.start + ' - ' + schedule.finish}
+                            {format(new Date(schedule.start), "dd/MM/yyyy (HH:mm:ss") + ' - ' + format(new Date(schedule.finish), "HH:mm:ss)")}
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                             <span className="text-gray-900 mr-4">{schedule.type}</span>

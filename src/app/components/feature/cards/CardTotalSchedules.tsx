@@ -1,5 +1,5 @@
 import { getSchedulesByStatus } from '@/api/schedules/routes';
-import {format } from 'date-fns'
+import { format } from 'date-fns';
 
 export default async function CardsTotalSchedules() {
   const schedules = await getSchedulesByStatus();
@@ -12,7 +12,7 @@ export default async function CardsTotalSchedules() {
           <div className="flex-auto p-4">
             <div className="flex flex-wrap">
               <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-                <h5 className="text-blueGray-400 uppercase font-bold text-xs"><a href='/schedules'>Total Schedules</a></h5>
+                <h5 className="text-blueGray-400 uppercase font-bold text-xs"><a href='/schedules'>Total Agendamentos</a></h5>
                 <span className="font-semibold text-xl text-blueGray-700"><a href='/schedules'>{total}</a></span>
               </div>
               <div className="relative w-auto pl-4 flex-initial">
