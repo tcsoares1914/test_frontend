@@ -44,7 +44,7 @@ export async function createOneSchedule(data: any) {
 /**
  * Get one schedule.
  */
-export async function getOneSchedule(id: string) {
+export async function getOneSchedule(id?: string) {
   try {
     const API_ENDPOINT = 'http://localhost:3000/schedule/' + id;
     const response = await fetch(API_ENDPOINT, {
@@ -55,6 +55,22 @@ export async function getOneSchedule(id: string) {
     });
   
     return await response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/**
+ * Get schedules by status.
+ */
+export async function getSchedulesByStatus(status?: string) {
+  try {
+    const API_ENDPOINT = 'http://localhost:3000/cards/';
+    const response = await axios.post(API_ENDPOINT, {
+      status: status
+    });
+
+    return response.data;
   } catch (error) {
     console.log(error);
   }

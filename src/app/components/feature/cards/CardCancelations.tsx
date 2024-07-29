@@ -1,4 +1,8 @@
-export default function CardsCancelations() {
+import { getSchedulesByStatus } from '@/api/schedules/routes';
+
+export default async function CardsCancelations() {
+  const schedules = await getSchedulesByStatus('CANCELED');
+  const total = schedules.total;
     return (
       <>
         <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
@@ -7,7 +11,7 @@ export default function CardsCancelations() {
               <div className="flex flex-wrap">
                 <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
                   <h5 className="text-blueGray-400 uppercase font-bold text-xs">Cancelations</h5>
-                  <span className="font-semibold text-xl text-blueGray-700"></span>
+                  <span className="font-semibold text-xl text-blueGray-700">{total}</span>
                 </div>
                 <div className="relative w-auto pl-4 flex-initial">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500">
