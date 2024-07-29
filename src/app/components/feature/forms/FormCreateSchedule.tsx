@@ -43,8 +43,8 @@ export default function FormCreateSchedule() {
                 <select
                   id="status"
                   {...register('status', { required: true })}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6">
-                  <option>Choose status</option>
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
+                >
                   {statusOptions.map((data) => {
                     return (
                       <option key={data.status} value={data.status}>{data.status}</option>
