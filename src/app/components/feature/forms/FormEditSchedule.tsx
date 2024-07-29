@@ -124,7 +124,7 @@ export default function FormEditSchedule(schedule: any) {
             </div>
           </div>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-3">
               <label
                 htmlFor="day"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -145,7 +145,7 @@ export default function FormEditSchedule(schedule: any) {
                 )}
               </div>
             </div>
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-3">
               <label
                 htmlFor="type"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -169,29 +169,6 @@ export default function FormEditSchedule(schedule: any) {
                   })}
                 </select>
                 {errors.hour?.type === "required" && (
-                  <p role="alert">This field is required</p>
-                )}
-              </div>
-            </div>
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="type"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Finish
-              </label>
-              <div className="mt-2">
-                <select
-                  id="finishHour"
-                  {...register('finishHour', { required: false })}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 sm:text-sm sm:leading-6"
-                  value={finishHour}
-                  onChange={(e) => setFinishHour(e.target.value)}
-                  disabled
-                  >
-                  <option value={finishHour}>{finishHour}</option>
-                </select>
-                {errors.finishHour?.type === "required" && (
                   <p role="alert">This field is required</p>
                 )}
               </div>
