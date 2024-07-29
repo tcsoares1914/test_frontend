@@ -1,6 +1,6 @@
 'use client'
 
-import { createOneSchedule, checkIfDayIsValid } from '@/api/schedules/routes';
+import { createOneSchedule } from '@/api/schedules/routes';
 import types from '@/mocks/types.json';
 import hours from '@/mocks/hours.json';
 import { useForm } from 'react-hook-form';

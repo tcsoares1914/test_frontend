@@ -7,6 +7,7 @@ import { updateOneSchedule } from '@/api/schedules/routes';
 import types from '@/mocks/types.json';
 import hours from '@/mocks/hours.json';
 
+
 export default function FormEditSchedule(schedule: any) {
   const [plate, setPlate] = useState<string>(schedule.schedule.plate);
   const [type, setType] = useState<string>(schedule.schedule.type);
@@ -18,18 +19,19 @@ export default function FormEditSchedule(schedule: any) {
   const [errorMessage, setErrorMessage] = useState<string | null>('');
   const {register, handleSubmit, formState: { errors }} = useForm();
   const onSubmit = async (data: any) => {
-
-    console.log('onSubmit');
-
     const date = new Date(data.day);
-
     if (date.getDay() === 5 || date.getDay() === 6) {
       setErrorMessage('Schedules is not available on weekends!');
     }
 
     if (date.getDay() !== 5 && date.getDay() !== 6) {
-      await updateOneSchedule(schedule.id, data);
-      window.location.href = "http://localhost:3001/schedules/";
+      const update = await updateOneSchedule(schedule.schedule.id, data);
+      if (update.status === 404) {
+        setErrorMessage(update.message);
+      }
+      if (update) {
+        window.location.href = "http://localhost:3001/schedules/";
+      }
     }
   }
   return (

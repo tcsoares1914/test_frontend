@@ -33,7 +33,6 @@ export async function createOneSchedule(data: any) {
     data.start = start;
     data.finish = setFinishtime(data.type, start);
     delete data.day && delete data.hour;
-    console.log(data);
     const response = await axios.post(API_ENDPOINT, data);
   
     return response.data;
@@ -69,9 +68,16 @@ export async function updateOneSchedule(id: string, data: any) {
     const API_ENDPOINT = 'http://localhost:3000/schedule/' + id;
     const start = data.day + ' ' + data.hour;
     data.start = start;
+    delete data.day && delete data.hour && delete data.finishHour;
     data.finish = setFinishtime(data.type, start);
-    console.log(data);
-    const response = await axios.patch(API_ENDPOINT, data);
+    const response = await axios.put(API_ENDPOINT, data);
+
+    if (response.status === 404) {
+      return {
+        code: 404,
+        status: response.data.message
+      }
+    }
   
     return response.data;
   } catch (error) {
